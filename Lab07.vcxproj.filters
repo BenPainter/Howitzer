@@ -56,6 +56,9 @@
     <ClInclude Include="testGround.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="testVelocity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
