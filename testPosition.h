@@ -36,6 +36,14 @@ public:
       
       addPixels();
       addMeters();
+
+      computeNewPosition_accel();
+      computeNewPosition_bigTime();
+      computeNewPosition_position();
+      computeNewPosition_simple();
+      computeNewPosition_time();
+      computeNewPosition_velocity();
+      computeNewPosition_zeros();
    }
    
 private:
@@ -142,6 +150,141 @@ private:
       // verify
       assert(pos.x == 4000.0);
       assert(pos.y == 7000.0);
+   }  // teardown
+
+   // Testing computeNewPosition with the following methods 
+
+   void computeNewPosition_zeros() const
+   {
+      // setup
+      Position pos;
+      pos.x = 0.0;
+      pos.y = 0.0;
+      double dx = 0.0;
+      double dy = 0.0;
+      double ddx = 0.0;
+      double ddy = 0.0;
+      double time = 0.0;
+      // exercise
+      pos.setMetersX(pos.computeNewPosition(pos.x, dx, ddx, time));
+      pos.setMetersY(pos.computeNewPosition(pos.y, dy, ddy, time));
+      // verify
+      assert(pos.x == 0.0);
+      assert(pos.y == 0.0);
+   }  // teardown
+
+   void computeNewPosition_time() const
+   {
+      // setup
+      Position pos;
+      pos.x = 0.0;
+      pos.y = 0.0;
+      double dx = 0.0;
+      double dy = 0.0;
+      double ddx = 0.0;
+      double ddy = 0.0;
+      double time = 1.0;
+      // exercise
+      pos.setMetersX(pos.computeNewPosition(pos.x, dx, ddx, time));
+      pos.setMetersY(pos.computeNewPosition(pos.y, dy, ddy, time));
+      // verify
+      assert(pos.x == 0.0);
+      assert(pos.y == 0.0);
+   }  // teardown
+
+   void computeNewPosition_accel() const
+   {
+      // setup
+      Position pos;
+      pos.x = 0.0;
+      pos.y = 0.0;
+      double dx = 0.0;
+      double dy = 0.0;
+      double ddx = 1.0;
+      double ddy = 2.0;
+      double time = 1.0;
+      // exercise
+      pos.setMetersX(pos.computeNewPosition(pos.x, dx, ddx, time));
+      pos.setMetersY(pos.computeNewPosition(pos.y, dy, ddy, time));
+      // verify
+      assert(pos.x == 0.5);
+      assert(pos.y == 1.0);
+   }  // teardown
+
+   void computeNewPosition_velocity() const
+   {
+      // setup
+      Position pos;
+      pos.x = 0.0;
+      pos.y = 0.0;
+      double dx = 1.0;
+      double dy = 2.0;
+      double ddx = 0.0;
+      double ddy = 0.0;
+      double time = 1.0;
+      // exercise
+      pos.setMetersX(pos.computeNewPosition(pos.x, dx, ddx, time));
+      pos.setMetersY(pos.computeNewPosition(pos.y, dy, ddy, time));
+      // verify
+      assert(pos.x == 1.0);
+      assert(pos.y == 2.0);
+   }  // teardown
+
+   void computeNewPosition_position() const
+   {
+      // setup
+      Position pos;
+      pos.x = 1.0;
+      pos.y = 2.0;
+      double dx = 0.0;
+      double dy = 0.0;
+      double ddx = 0.0;
+      double ddy = 0.0;
+      double time = 1.0;
+      // exercise
+      pos.setMetersX(pos.computeNewPosition(pos.x, dx, ddx, time));
+      pos.setMetersY(pos.computeNewPosition(pos.y, dy, ddy, time));
+      // verify
+      assert(pos.x == 1.0);
+      assert(pos.y == 2.0);
+   }  // teardown
+
+   void computeNewPosition_simple() const
+   {
+      // setup
+      Position pos;
+      pos.x = 0.0;
+      pos.y = 0.0;
+      double dx = 1.0;
+      double dy = 2.0;
+      double ddx = 1.0;
+      double ddy = 2.0;
+      double time = 1.0;
+      // exercise
+      pos.setMetersX(pos.computeNewPosition(pos.x, dx, ddx, time));
+      pos.setMetersY(pos.computeNewPosition(pos.y, dy, ddy, time));
+      // verify
+      assert(pos.x == 1.5);
+      assert(pos.y == 3.0);
+   }  // teardown
+
+   void computeNewPosition_bigTime() const
+   {
+      // setup
+      Position pos;
+      pos.x = 0.0;
+      pos.y = 0.0;
+      double dx = 1.0;
+      double dy = 2.0;
+      double ddx = 1.0;
+      double ddy = 2.0;
+      double time = 10.0;
+      // exercise
+      pos.setMetersX(pos.computeNewPosition(pos.x, dx, ddx, time));
+      pos.setMetersY(pos.computeNewPosition(pos.y, dy, ddy, time));
+      // verify
+      assert(pos.x == 60.0);
+      assert(pos.y == 120.0);
    }  // teardown
 
 };

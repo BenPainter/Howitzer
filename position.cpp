@@ -29,6 +29,21 @@ Position& Position::operator = (const Position& pt)
 }
 
 
+/*******************************************************
+* COMPUTE NEW POSITION  
+* Uses the original position, velocity, acceleration, and
+* time to calculate a new position.
+********************************************************/
+double Position::computeNewPosition(double s, double v, double a, double t)
+{
+   // returns the new position
+   return s + (v * t) + (.5 * a * (t * t));
+}
+
+
+
+
+
 /******************************************
  * POSITION insertion
  *       Display coordinates on the screen
@@ -54,3 +69,5 @@ std::istream& operator >> (std::istream& in, Position& pt)
 
    return in;
 }
+
+
