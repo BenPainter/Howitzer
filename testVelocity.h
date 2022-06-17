@@ -19,7 +19,7 @@ using namespace std;
  * TEST Velocity
  * A friend class for Velocity which contains the Velocity unit tests
  ********************************/
-class TestVelocity
+class testVelocity
 {
 public:
    void run()
