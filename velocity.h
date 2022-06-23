@@ -1,7 +1,7 @@
 #pragma once
 #include "acceleration.h"
 
-class testVelocity;
+class TestVelocity;
 
 
 class Velocity
@@ -11,7 +11,7 @@ private:
    double dy;
 
 public:
-   friend testVelocity;
+   friend TestVelocity;
 
    // constructors
    Velocity() : dx(0.0), dy(0.0) {};
