@@ -147,8 +147,8 @@ private:
       Acceleration accel;
       vel.dx = 0.0;
       vel.dy = 0.0;
-      accel.ddx = 0.0;
-      accel.ddy = 0.0;
+      accel.setDDX(0.0);
+      accel.setDDY(0.0);
       double time = 0.0;
       // exercise
       vel.addVelocity(accel, time);
@@ -164,8 +164,8 @@ private:
       Acceleration accel;
       vel.dx = 0.0;
       vel.dy = 0.0;
-      accel.ddx = 0.0;
-      accel.ddy = 0.0;
+      accel.setDDX(0.0);
+      accel.setDDY(0.0);
       double time = 1.0;
       // exercise
       vel.addVelocity(accel, time);
@@ -181,8 +181,8 @@ private:
       Acceleration accel;
       vel.dx = 0.0;
       vel.dy = 0.0;
-      accel.ddx = 1.0;
-      accel.ddy = 1.0;
+      accel.setDDX(1.0);
+      accel.setDDY(1.0);
       double time = 0.0;
       // exercise
       vel.addVelocity(accel, time);
@@ -198,8 +198,8 @@ private:
       Acceleration accel;
       vel.dx = 0.0;
       vel.dy = 1.0;
-      accel.ddx = 1.0;
-      accel.ddy = 1.0;
+      accel.setDDX(1.0);
+      accel.setDDY(1.0);
       double time = 1.0;
       // exercise
       vel.addVelocity(accel, time);
@@ -215,8 +215,8 @@ private:
       Acceleration accel;
       vel.dx = 1.0;
       vel.dy = 1.0;
-      accel.ddx = 1.0;
-      accel.ddy = -1.0;
+      accel.setDDX(1.0);
+      accel.setDDY(-1.0);
       double time = 1.0;
       // exercise
       vel.addVelocity(accel, time);
@@ -232,8 +232,8 @@ private:
       Acceleration accel;
       vel.dx = 0.0;
       vel.dy = 1.0;
-      accel.ddx = 1.0;
-      accel.ddy = 1.0;
+      accel.setDDX(1.0);
+      accel.setDDY(1.0);
       double time =.5;
       // exercise
       vel.addVelocity(accel, time);

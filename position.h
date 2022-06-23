@@ -57,7 +57,7 @@ public:
    }
    double getZoom() const { return metersFromPixels; }
 
-   double computeNewPosition(double s, double v, double a, double t) {}
+   double computeNewPosition(double s, double v, double a, double t);
    
 
 

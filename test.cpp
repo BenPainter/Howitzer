@@ -10,6 +10,7 @@
 #include "test.h"
 #include "testPosition.h"
 #include "testGround.h"
+#include "testVelocity.h"
 
 /*****************************************************************
  * TEST RUNNER
@@ -19,4 +20,6 @@ void testRunner()
 {
    TestPosition().run();
    TestGround().run();
+   testVelocity().run();
+   cout << "Success!\n";
 }

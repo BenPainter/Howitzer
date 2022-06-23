@@ -21,8 +21,8 @@ public:
    double getDY() const { return dy; };
    double computeVelocity();
 
-   void setDX(double dx);
-   void setDY(double dy);
+   void setDX(double dx) { this->dx = dx; };
+   void setDY(double dy) { this->dy = dy; };
 
    void addVelocity(Acceleration accel, double time);
 };
