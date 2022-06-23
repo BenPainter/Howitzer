@@ -1,13 +1,8 @@
 #pragma once
-/***********************************************************************
- * Header File:
- *    Test Physics Functions: Test the physics functions
- * Author:
- *    Star Balls & Ben Painter
- * Summary:
- *    All the unit tests for physics functions
- ************************************************************************/
-
+double linearInter(const double d, const double d0, const double  r0, const double d1, const double r1);
+double verticalComp(const double s, const double a);
+double horizontalComp(const double s, const double a);
+double dragForce(const double c, const double p, const double v, const double a);
 
 #include <iostream>
 #include <cassert>
@@ -21,6 +16,7 @@ using namespace std;
  ********************************/
 class TestPhysics
 {
+
 public:
    void run()
    {
@@ -52,8 +48,6 @@ public:
       dragForce_area();
       dragForce_simple();
       dragForce_realTime();
-
-
    }
 
 private:
@@ -91,16 +85,10 @@ private:
       double r1 = 0.0;
       double r;
       // exercise
-      try 
-      {
-         r = linearInter(d, d0, r0, d1, r1);
-         // verify
-         assert(false);
-      }
-      catch(...)
-      {
+      r = linearInter(d, d0, r0, d1, r1);
+      // verify
+      assert(r == r0);
 
-      }
    }// teardown
 
    void linearInter_negative() const
@@ -205,19 +193,19 @@ private:
    {
       // setup
       double s = 1.0;
-      double angle = 90.0;
+      double angle = 1.5708;                                        // 90 degrees = 1.5708 radians
       double ddy;
       // exercise
       ddy = verticalComp(s, angle);
-      // verify
-      assert(ddy == 0);
-   } // teardown
+      // verify  
+      assert(closeEnough(0, ddy, 0.001));
+   } // teardown                                 
 
    void verticalComp_middleAngle() const
    {
       // setup
       double s = 1.0;
-      double angle = 45.0;
+      double angle = 0.785398;                                     // 45 degrees = 0.785398 radians
       double ddy;
       // exercise
       ddy = verticalComp(s, angle);
@@ -229,7 +217,7 @@ private:
    {
       // setup
       double s = 1.0;
-      double angle = -45.0;
+      double angle = -0.785398;                                   // -45 degrees = -0.785398 radians
       double ddy;
       // exercise
       ddy = verticalComp(s, angle);
@@ -278,34 +266,34 @@ private:
    {
       // setup
       double s = 1.0;
-      double angle = 90.0;
+      double angle = 1.5708;                                    // 90 degrees = 1.5708 radians
       double ddx;
       // exercise
       ddx = horizontalComp(s, angle);
       // verify
-      assert(ddx == 1);
+      assert(closeEnough(1, ddx, 0.001));
    } // teardown
 
    void horizontalComp_middleAngle() const
    {
       // setup
       double s = 1.0;
-      double angle = 45.0;
+      double angle = 0.785398;                                   // 45 degrees = 0.785398 radians
       double ddx;
       // exercise
       ddx = horizontalComp(s, angle);
       // verify
-      assert(closeEnough(0.707106, ddx, 0.001));
+      assert(closeEnough(0.70710667, ddx, 0.001));
    } // teardown
 
    void horizontalComp_negativeAngle() const
    {
       // setup
       double s = 1.0;
-      double angle = -45.0;
+      double angle = -0.785398;                                    // -45 degrees = -0.785398 radians
       double ddx;
       // exercise
-      ddx = horizontaComp(s, angle);
+      ddx = horizontalComp(s, angle);
       // verify
       assert(closeEnough(-0.707106, ddx, 0.001));
    } // teardown
@@ -406,7 +394,6 @@ private:
       // exercise
       drag = dragForce(c, p, v, a);
       // verify
-      assert(closeEnough(2048.600826, drag, 0.001));
+      assert(closeEnough(2048.33793, drag, 0.001));
    }  // teardown
-
 };

@@ -11,6 +11,7 @@
 #include "testPosition.h"
 #include "testGround.h"
 #include "testVelocity.h"
+#include "testPhysics.h"
 
 /*****************************************************************
  * TEST RUNNER
@@ -21,5 +22,6 @@ void testRunner()
    TestPosition().run();
    TestGround().run();
    testVelocity().run();
+   TestPhysics().run();
    cout << "Success!\n";
 }
