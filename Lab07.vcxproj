@@ -142,6 +142,7 @@
     <ClCompile Include="acceleration.cpp" />
     <ClCompile Include="ground.cpp" />
     <ClCompile Include="Lab07.cpp" />
+    <ClCompile Include="physics.cpp" />
     <ClCompile Include="position.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="uiDraw.cpp" />
@@ -151,6 +152,7 @@
   <ItemGroup>
     <ClInclude Include="acceleration.h" />
     <ClInclude Include="ground.h" />
+    <ClInclude Include="physics.h" />
     <ClInclude Include="position.h" />
     <ClInclude Include="test.h" />
     <ClInclude Include="testGround.h" />
