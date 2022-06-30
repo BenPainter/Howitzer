@@ -21,7 +21,7 @@ void testRunner()
 {
    TestPosition().run();
    TestGround().run();
-   testVelocity().run();
+   TestVelocity().run();
    TestPhysics().run();
    cout << "Success!\n";
 }
