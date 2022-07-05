@@ -49,6 +49,14 @@ double Ground::getElevationMeters(const Position& pos) const
    return posImpact.getMetersY();
 }
 
+
+int Ground::getY(const Position pos)
+{
+   std::cout << "Ground: " << *ground;
+   return ground[(int)pos.getPixelsX()];
+}
+
+
 /************************************************************************
  * GROUND :: GET TARGET 
  * Where the the target located?

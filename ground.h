@@ -38,6 +38,8 @@ public:
    // where the the target located?
    Position getTarget() const;
 
+   int getY(const Position pos);
+
    // unit test access
    friend TestGround;
 

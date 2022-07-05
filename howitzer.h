@@ -22,7 +22,7 @@ public:
    bool isFired();
    Position getPT();
    double getAngle();
-   Position setPT();
+   void setPT(Position newPT);
    double setAngle();
    void draw(ogstream& gout);
    double getAge();

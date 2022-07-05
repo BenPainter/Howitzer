@@ -35,9 +35,9 @@ double Howitzer::getAngle()
 /*****************************************************
 * Howitzer
 ******************************************************/
-Position Howitzer::setPT()
+void Howitzer::setPT(Position newPT)
 {
-   return Position();
+   pt = newPT;
 }
 
 /*****************************************************
@@ -53,6 +53,7 @@ double Howitzer::setAngle()
 ******************************************************/
 void Howitzer::draw(ogstream& gout)
 {
+   gout.drawHowitzer(pt, angle, age);
 }
 
 /*****************************************************

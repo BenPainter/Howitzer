@@ -18,6 +18,7 @@
 #include "position.h"   // for POSITION
 #include "test.h"
 #include "physics.h"
+#include "howitzer.h"  // for HOWITZER
 
 using namespace std;
 
@@ -37,7 +38,12 @@ public:
       angle(0.0)
    {
       ptHowitzer.setPixelsX(Position(ptUpperRight).getPixelsX() / 2.0);
-      ground.reset(ptHowitzer);
+      test.setPixelsX(random(0.0, ptUpperRight.getPixelsX()));
+      test.setPixelsY(ground.getY(test));
+      cout << "X: " << test.getPixelsX();
+      cout << "\nY: " << test.getPixelsY();
+      howitzer.setPT(test);
+      ground.reset(test);
       for (int i = 0; i < 20; i++)
       {
          projectilePath[i].setPixelsX((double)i * 2.0);
@@ -49,6 +55,8 @@ public:
    Position  projectilePath[20];  // path of the projectile
    Position  ptHowitzer;          // location of the howitzer
    Position  ptUpperRight;        // size of the screen
+   Howitzer howitzer;
+   Position test;
    double angle;                  // angle of the howitzer 
    double time;                   // amount of time since the last firing
 };
@@ -113,7 +121,8 @@ void callBack(const Interface* pUI, void* p)
    pGame->ground.draw(gout);
 
    // draw the howitzer
-   gout.drawHowitzer(pGame->ptHowitzer, pGame->angle, pGame->time);
+   //gout.drawHowitzer(pGame->ptHowitzer, pGame->angle, pGame->time);
+   pGame->howitzer.draw(gout);
 
    // draw the projectile
    for (int i = 0; i < 20; i++)
