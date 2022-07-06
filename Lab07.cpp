@@ -37,13 +37,10 @@ public:
       time(0.0),
       angle(0.0)
    {
-      ptHowitzer.setPixelsX(Position(ptUpperRight).getPixelsX() / 2.0);
-      test.setPixelsX(random(0.0, ptUpperRight.getPixelsX()));
-      test.setPixelsY(ground.getY(test));
-      cout << "X: " << test.getPixelsX();
-      cout << "\nY: " << test.getPixelsY();
-      howitzer.setPT(test);
-      ground.reset(test);
+      //ptHowitzer.setPixelsX(Position(ptUpperRight).getPixelsX() / 2.0);
+      ptHowitzer.setPixelsX(200.0);//random(0.0, 700.0));
+      ground.reset(ptHowitzer);
+      howitzer.setPT(ptHowitzer);
       for (int i = 0; i < 20; i++)
       {
          projectilePath[i].setPixelsX((double)i * 2.0);
@@ -56,7 +53,6 @@ public:
    Position  ptHowitzer;          // location of the howitzer
    Position  ptUpperRight;        // size of the screen
    Howitzer howitzer;
-   Position test;
    double angle;                  // angle of the howitzer 
    double time;                   // amount of time since the last firing
 };
