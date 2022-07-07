@@ -19,6 +19,8 @@
 #include "test.h"
 #include "physics.h"
 #include "howitzer.h"  // for HOWITZER
+#include "projectile.h" // for PROJECTILE
+
 
 using namespace std;
 
@@ -53,6 +55,7 @@ public:
    Position  ptHowitzer;          // location of the howitzer
    Position  ptUpperRight;        // size of the screen
    Howitzer howitzer;
+   Projectile projectile; 
    double angle;                  // angle of the howitzer 
    double time;                   // amount of time since the last firing
 };
@@ -69,26 +72,19 @@ void callBack(const Interface* pUI, void* p)
    // the first step is to cast the void pointer into a game object. This
    // is the first step of every single callback function in OpenGL. 
    Game* pGame = (Game*)p;
-
+   Acceleration accel;
    //
    // accept input
    //
 
-   // move a large amount
-   if (pUI->isRight())
-      pGame->angle += 0.05;
-   if (pUI->isLeft())
-      pGame->angle -= 0.05;
+   if (!pGame->howitzer.isFired())
+      pGame->howitzer.input(*pUI);
+   else if (!pGame->projectile.isAlive())
+      pGame->projectile.fired(pGame->howitzer.getPT());
 
-   // move by a little
-   if (pUI->isUp())
-      pGame->angle += (pGame->angle >= 0 ? -0.003 : 0.003);
-   if (pUI->isDown())
-      pGame->angle += (pGame->angle >= 0 ? 0.003 : -0.003);
+  
 
-   // fire that gun
-   if (pUI->isSpace())
-      pGame->time = 0.0;
+
 
    //
    // perform all the game logic
@@ -98,14 +94,8 @@ void callBack(const Interface* pUI, void* p)
    pGame->time += 0.5;
 
    // move the projectile across the screen
-   for (int i = 0; i < 20; i++)
-   {
-      double x = pGame->projectilePath[i].getPixelsX();
-      x -= 1.0;
-      if (x < 0)
-         x = pGame->ptUpperRight.getPixelsX();
-      pGame->projectilePath[i].setPixelsX(x);
-   }
+   if (pGame->projectile.isAlive())
+      pGame->projectile.update(accel, pGame->howitzer.getAngle());
 
    //
    // draw everything
@@ -117,12 +107,11 @@ void callBack(const Interface* pUI, void* p)
    pGame->ground.draw(gout);
 
    // draw the howitzer
-   //gout.drawHowitzer(pGame->ptHowitzer, pGame->angle, pGame->time);
    pGame->howitzer.draw(gout);
 
    // draw the projectile
-   for (int i = 0; i < 20; i++)
-      gout.drawProjectile(pGame->projectilePath[i], 0.5 * (double)i);
+
+   pGame->projectile.draw(gout);
 
    // draw some text on the screen
    gout.setf(ios::fixed | ios::showpoint);

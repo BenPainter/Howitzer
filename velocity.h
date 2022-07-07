@@ -24,6 +24,6 @@ public:
    void setDX(double dx) { this->dx = dx; };
    void setDY(double dy) { this->dy = dy; };
 
-   void addVelocity(Acceleration accel, double time);
+   void updateVelocity(Acceleration accel, double time);
 };
 

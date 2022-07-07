@@ -1,6 +1,7 @@
 #pragma once
 #include "position.h"
 #include "uiDraw.h"
+#include "uiInteract.h"
 
 using namespace std;
 /*****************************************************
@@ -18,11 +19,11 @@ private:
 public:
    Howitzer() { reset(); };
    Howitzer(Position pt) { this->pt = pt; };
-   void input();
+   void input(const Interface& pUI);
    bool isFired();
    Position getPT();
    double getAngle();
-   void setPT(Position newPT);
+   void setPT(const Position &newPT);
    double setAngle();
    void draw(ogstream& gout);
    double getAge();

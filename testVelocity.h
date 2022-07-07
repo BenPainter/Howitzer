@@ -151,7 +151,7 @@ private:
       accel.setDDY(0.0);
       double time = 0.0;
       // exercise
-      vel.addVelocity(accel, time);
+      vel.updateVelocity(accel, time);
       // verify
       assert(vel.dx == 0.0);
       assert(vel.dy == 0.0);
@@ -168,7 +168,7 @@ private:
       accel.setDDY(0.0);
       double time = 1.0;
       // exercise
-      vel.addVelocity(accel, time);
+      vel.updateVelocity(accel, time);
       // verify
       assert(vel.dx == 0.0);
       assert(vel.dy == 0.0);
@@ -185,7 +185,7 @@ private:
       accel.setDDY(1.0);
       double time = 0.0;
       // exercise
-      vel.addVelocity(accel, time);
+      vel.updateVelocity(accel, time);
       // verify
       assert(vel.dx == 0.0);
       assert(vel.dy == 0.0);
@@ -202,7 +202,7 @@ private:
       accel.setDDY(1.0);
       double time = 1.0;
       // exercise
-      vel.addVelocity(accel, time);
+      vel.updateVelocity(accel, time);
       // verify
       assert(vel.dx == 1.0);
       assert(vel.dy == 2.0);
@@ -219,7 +219,7 @@ private:
       accel.setDDY(-1.0);
       double time = 1.0;
       // exercise
-      vel.addVelocity(accel, time);
+      vel.updateVelocity(accel, time);
       // verify
       assert(vel.dx == 2.0);
       assert(vel.dy == 0.0);
@@ -236,7 +236,7 @@ private:
       accel.setDDY(1.0);
       double time =.5;
       // exercise
-      vel.addVelocity(accel, time);
+      vel.updateVelocity(accel, time);
       // verify
       assert(vel.dx == 0.5);
       assert(vel.dy == 1.5);

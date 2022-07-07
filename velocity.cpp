@@ -28,7 +28,7 @@ double Velocity::computeVelocity()
  * Velocity ADD VELOCITY
  * Adds acceleration to the velocity
  ************************************************************************/
-void Velocity::addVelocity(Acceleration accel, double time)
+void Velocity::updateVelocity(Acceleration accel, double time)
 {
    dx = (dx + accel.getDDX() * time);
    dy = (dy + accel.getDDY() * time);
