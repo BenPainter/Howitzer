@@ -38,7 +38,6 @@ public:
    Game(Position ptUpperRight) :
       ptUpperRight(ptUpperRight),
       ground(ptUpperRight),
-      time(0.0),
       angle(0.0)
    {
       //ptHowitzer.setPixelsX(Position(ptUpperRight).getPixelsX() / 2.0);
@@ -58,8 +57,7 @@ public:
    Position  ptUpperRight;        // size of the screen
    Howitzer howitzer;
    Projectile projectile; 
-   double angle;                  // angle of the howitzer 
-   double time;                   // amount of time since the last firing
+   double angle;                  // angle of the howitzer
 };
 
 /*************************************
@@ -79,6 +77,9 @@ void callBack(const Interface* pUI, void* p)
    // accept input
    //
 
+   double distanceFromTarget = computeDistance(pGame->projectile.getPT(), pGame->ground.getTarget());
+
+
    if (!pGame->howitzer.isFired() && !pGame->projectile.isAlive())
       pGame->howitzer.input(*pUI);
    else if (!pGame->projectile.isAlive())
@@ -95,8 +96,11 @@ void callBack(const Interface* pUI, void* p)
    if (pGame->projectile.getPT().getMetersY() - pGame->ground.getElevationMeters(pGame->projectile.getPT()) < 0.0)
       pGame->projectile.missTarget();
 
+   if (pGame->projectile.getPT().getPixelsX() < 0.0 || pGame->projectile.getPT().getPixelsX() > 700.0)
+      pGame->projectile.missTarget();
+
    // Checking for hit target
-   if (pGame->projectile.getPT() == pGame->ground.getTarget()) 
+   if ( distanceFromTarget <= 400.0)
    {
       pGame->projectile.hitTargert();
       cout << "Hit!";
@@ -115,12 +119,14 @@ void callBack(const Interface* pUI, void* p)
    //
 
    // advance time by half a second.
-   pGame->time += 0.5;
+   //pGame->time += 0.5;
 
    // move the projectile across the screen
    if (pGame->projectile.isAlive())
+   {
       pGame->projectile.update(accel);
-
+      pGame->howitzer.updateAge();
+   }
    //
    // draw everything
    //
@@ -141,7 +147,7 @@ void callBack(const Interface* pUI, void* p)
    gout.setf(ios::fixed | ios::showpoint);
    gout.precision(1);
    gout << "Time since the bullet was fired: "
-      << pGame->time << "s\n";
+      << pGame->howitzer.getAge() << "s\n";
 
    
 }

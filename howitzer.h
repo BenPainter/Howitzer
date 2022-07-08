@@ -30,7 +30,8 @@ public:
    void loadHowitzer() { fired = false; };
 
    void draw(ogstream& gout);
-   double getAge();
+   double getAge() { return age; };
+   void updateAge() { age += 0.5; };
    void reset();
 
 };
