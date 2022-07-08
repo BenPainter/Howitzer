@@ -1,5 +1,7 @@
 #include "velocity.h"
 #include <cmath> // for sqrt
+#define _USE_MATH_DEFINES
+#include <math.h> 
 
 /***********************************************************************
  * Velocity: change in position divided by time
@@ -25,11 +27,17 @@ double Velocity::computeVelocity()
 }
 
 /***********************************************************************
- * Velocity ADD VELOCITY
+ * Velocity UPDATE VELOCITY
  * Adds acceleration to the velocity
  ************************************************************************/
 void Velocity::updateVelocity(Acceleration accel, double time)
 {
    dx = (dx + accel.getDDX() * time);
    dy = (dy + accel.getDDY() * time);
+}
+
+
+double Velocity::computeAngle()
+{
+   return atan2(dx, dy);
 }

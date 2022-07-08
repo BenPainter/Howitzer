@@ -20,6 +20,7 @@ public:
    double getDX() const { return dx; };
    double getDY() const { return dy; };
    double computeVelocity();
+   double computeAngle();
 
    void setDX(double dx) { this->dx = dx; };
    void setDY(double dy) { this->dy = dy; };

@@ -1,6 +1,6 @@
 /*************************************************************
  * 1. Name:
- *      The Key
+ *      Ben Painter, Star Balls
  * 2. Assignment Name:
  *      Lab 08: M777 Howitzer
  * 3. Assignment Description:
@@ -12,6 +12,8 @@
  *****************************************************************/
 
 #include <cassert>      // for ASSERT
+#include <cstdlib>      // for srand
+#include <ctime>       // for time for srand
 #include "uiInteract.h" // for INTERFACE
 #include "uiDraw.h"     // for RANDOM and DRAW*
 #include "ground.h"     // for GROUND
@@ -40,7 +42,7 @@ public:
       angle(0.0)
    {
       //ptHowitzer.setPixelsX(Position(ptUpperRight).getPixelsX() / 2.0);
-      ptHowitzer.setPixelsX(200.0);//random(0.0, 700.0));
+      ptHowitzer.setPixelsX(rand() % 700);//random(0.0, 700.0));
       ground.reset(ptHowitzer);
       howitzer.setPT(ptHowitzer);
       for (int i = 0; i < 20; i++)
@@ -77,12 +79,34 @@ void callBack(const Interface* pUI, void* p)
    // accept input
    //
 
-   if (!pGame->howitzer.isFired())
+   if (!pGame->howitzer.isFired() && !pGame->projectile.isAlive())
       pGame->howitzer.input(*pUI);
    else if (!pGame->projectile.isAlive())
-      pGame->projectile.fired(pGame->howitzer.getPT());
+   {
+      pGame->projectile.fired(pGame->howitzer.getPT(), pGame->howitzer.getAngle());
+      pGame->howitzer.loadHowitzer();
+   }
+      
 
-  
+
+   double test = pGame->ground.getElevationMeters(pGame->projectile.getPT());
+   
+   // checking if above ground
+   if (pGame->projectile.getPT().getMetersY() - pGame->ground.getElevationMeters(pGame->projectile.getPT()) < 0.0)
+      pGame->projectile.missTarget();
+
+   // Checking for hit target
+   if (pGame->projectile.getPT() == pGame->ground.getTarget()) 
+   {
+      pGame->projectile.hitTargert();
+      cout << "Hit!";
+      pGame->howitzer.reset();
+      pGame->ground.reset(pGame->ptHowitzer);
+      pGame->howitzer.setPT(pGame->ptHowitzer);
+      pGame->projectile.reset();
+      
+
+   }
 
 
 
@@ -95,7 +119,7 @@ void callBack(const Interface* pUI, void* p)
 
    // move the projectile across the screen
    if (pGame->projectile.isAlive())
-      pGame->projectile.update(accel, pGame->howitzer.getAngle());
+      pGame->projectile.update(accel);
 
    //
    // draw everything
@@ -118,6 +142,8 @@ void callBack(const Interface* pUI, void* p)
    gout.precision(1);
    gout << "Time since the bullet was fired: "
       << pGame->time << "s\n";
+
+   
 }
 
 double Position::metersFromPixels = 40.0;
@@ -145,6 +171,7 @@ int main(int argc, char** argv)
       "Game",   /* name on the window */
       ptUpperRight);
 
+   srand(time(0));
    // Initialize the game
    Game game(ptUpperRight);
 

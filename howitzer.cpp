@@ -91,4 +91,5 @@ void Howitzer::reset()
    age = -1;
    angle = 0.0;
    fired = false;
+   pt.setMetersX(200.0);
 }

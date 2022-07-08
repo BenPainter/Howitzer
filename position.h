@@ -60,6 +60,11 @@ public:
    double computeNewPosition(double s, double v, double a, double t);
    
 
+   bool operator == (const Position& rhs) const
+   {
+      return ((x >= rhs.x - 200.0) && (x <= rhs.x + 200.0)) && (y <= rhs.y + 200.0);
+   }
+
 
 private:
    double x;                 // horizontal position

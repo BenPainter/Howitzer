@@ -23,8 +23,12 @@ public:
    bool isFired();
    Position getPT();
    double getAngle();
+
+
    void setPT(const Position &newPT);
    double setAngle();
+   void loadHowitzer() { fired = false; };
+
    void draw(ogstream& gout);
    double getAge();
    void reset();

@@ -20,45 +20,23 @@ void Projectile::draw(ogstream& gout)
 /*****************************************
 * Projectile
 ******************************************/
-bool Projectile::isAlive()
+void Projectile::update(Acceleration accel)
 {
-   return status == ALIVE;
-}
+   double angle = velocity.computeAngle();
+   double totalVelocity = velocity.computeVelocity();
+   double p = tableLookUp(vectorFromID(1), vectorFromID(2), pt.getMetersY());
+   double vSound = tableLookUp(vectorFromID(1), vectorFromID(3), pt.getMetersY());
+   double vMach = totalVelocity / vSound;
+   double c = tableLookUp(vectorFromID(5), vectorFromID(6), vMach);
+   double force = dragForce(c, p, totalVelocity, AREA);
+   double acc = (force / MASS);
+   accel.setDDX(horizontalComp(-acc, angle));
+   accel.setDDY(-tableLookUp(vectorFromID(1), vectorFromID(4), pt.getMetersY()) + verticalComp(-acc, angle));
 
-/*****************************************
-* Projectile
-******************************************/
-bool Projectile::isHit()
-{
-   return false;
-}
 
-/*****************************************
-* Projectile
-******************************************/
-bool Projectile::isMiss()
-{
-   return false;
-}
-
-/*****************************************
-* Projectile
-******************************************/
-void Projectile::setPT(Position pt)
-{
-}
-
-/*****************************************
-* Projectile
-******************************************/
-void Projectile::update(Acceleration accel, const double &newAngle)
-{
-   velocity.setDX(horizontalComp(827.0, newAngle));
-   velocity.setDY(verticalComp(827.0, newAngle));
-
-   pt.setMetersX(pt.computeNewPosition(pt.getMetersX(), velocity.getDX(), 1.0, 0.1));
-   pt.setMetersY(pt.computeNewPosition(pt.getMetersY(), velocity.getDY(), 1.0, 0.1));
-   velocity.updateVelocity(accel, 0.1);
+   pt.setMetersX(pt.computeNewPosition(pt.getMetersX(), velocity.getDX(), accel.getDDX(), TIME));
+   pt.setMetersY(pt.computeNewPosition(pt.getMetersY(), velocity.getDY(), accel.getDDY(), TIME));
+   velocity.updateVelocity(accel, TIME);
 
 }
 
@@ -77,6 +55,7 @@ void Projectile::reset()
 ******************************************/
 void Projectile::hitTargert()
 {
+   status = HIT;
 }
 
 /*****************************************
@@ -84,13 +63,19 @@ void Projectile::hitTargert()
 ******************************************/
 void Projectile::missTarget()
 {
+   status = READY;
+   pt.setPixelsY(550.0);
+
 }
 
 /*****************************************
 * Projectile
 ******************************************/
-void Projectile::fired(Position newPT)
+void Projectile::fired(Position newPT, const double& newAngle)
 {
    status = ALIVE;
    pt = newPT;
+
+   velocity.setDX(horizontalComp(827.0, newAngle));
+   velocity.setDY(verticalComp(827.0, newAngle));
 }
