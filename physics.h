@@ -6,9 +6,9 @@
 
 using namespace std;
 
-//enum {ALTITUDE, DENSITY, SOUND, GRAVITY, MACH, DRAG};
+enum vectorNames {ALTITUDE, DENSITY, SOUND, GRAVITY, MACH, DRAG};
 
-vector <double> vectorFromID(int id);
+vector <double> vectorFromID(vectorNames tableName);
 
 double linearInter(const double d, const double d0, const double  r0, const double d1, const double r1);
 double verticalComp(const double s, const double a);

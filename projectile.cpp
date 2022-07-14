@@ -27,14 +27,14 @@ void Projectile::update(Acceleration accel)
    updateTail();
    double angle = velocity.computeAngle();
    double totalVelocity = velocity.computeVelocity();
-   double p = tableLookUp(vectorFromID(1), vectorFromID(2), pt.getMetersY());
-   double vSound = tableLookUp(vectorFromID(1), vectorFromID(3), pt.getMetersY());
+   double p = tableLookUp(vectorFromID(ALTITUDE), vectorFromID(DENSITY), pt.getMetersY());
+   double vSound = tableLookUp(vectorFromID(ALTITUDE), vectorFromID(SOUND), pt.getMetersY());
    double vMach = totalVelocity / vSound;
-   double c = tableLookUp(vectorFromID(5), vectorFromID(6), vMach);
+   double c = tableLookUp(vectorFromID(MACH), vectorFromID(DRAG), vMach);
    double force = dragForce(c, p, totalVelocity, AREA);
    double acc = (force / MASS);
    accel.setDDX(horizontalComp(-acc, angle));
-   accel.setDDY(-tableLookUp(vectorFromID(1), vectorFromID(4), pt.getMetersY()) + verticalComp(-acc, angle));
+   accel.setDDY(-tableLookUp(vectorFromID(ALTITUDE), vectorFromID(GRAVITY), pt.getMetersY()) + verticalComp(-acc, angle));
 
 
    pt.setMetersX(pt.computeNewPosition(pt.getMetersX(), velocity.getDX(), accel.getDDX(), TIME));

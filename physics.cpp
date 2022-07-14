@@ -8,21 +8,21 @@ vector <double> gravityArray = { 9.807, 9.804, 9.801, 9.797, 9.794, 9.791, 9.788
 vector <double> machArray = { 0.0, 0.3, 0.5, 0.7, 0.89, 0.92, 0.96, 0.98, 1.0, 1.02, 1.06, 1.24, 1.53, 1.99, 2.87, 2.89, 5.0 };
 vector <double> dragArray = { 0.1629, 0.1629, 0.1659, 0.2031, 0.2597, 0.301, 0.3287, 0.4002, 0.4258, 0.4335, 0.4483, 0.4064, 0.3663, 0.2897, 0.2297, 0.2306, 0.2656 };
 
-vector <double> vectorFromID(int id)
+vector <double> vectorFromID(vectorNames tableName)
 {
-   switch(id)
+   switch(tableName)
    {
-   case 1:
+   case ALTITUDE:
       return altitudeArray;
-   case 2:
+   case DENSITY:
       return densityArray;
-   case 3:
+   case SOUND:
       return soundArray;
-   case 4:
+   case GRAVITY:
       return gravityArray;
-   case 5:
+   case MACH:
       return machArray;
-   case 6:
+   case DRAG:
       return dragArray;
    }
 }
