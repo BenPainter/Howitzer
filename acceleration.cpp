@@ -1,10 +1,9 @@
 #include "acceleration.h"
 
 /***********************************************************************
- * Acceleration: uses the velocity to calculate acceleration and return
- *               acceleration of the lunar module.
+ * Acceleration: uses the velocity to calculate 
+ *               and return the acceleration. 
  ************************************************************************/
-
 
  /***********************************************************************
   * Acceleration

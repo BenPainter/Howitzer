@@ -1,4 +1,3 @@
-#pragma once
 /***********************************************************************
  * Header File:
  *    Test Velocity : Test the Velocity class
@@ -7,8 +6,7 @@
  * Summary:
  *    All the unit tests for Velocity
  ************************************************************************/
-
-
+#pragma once
 #include <iostream>
 #include "velocity.h"
 #include <cassert>
@@ -241,5 +239,4 @@ private:
       assert(vel.dx == 0.5);
       assert(vel.dy == 1.5);
    }
-
 };

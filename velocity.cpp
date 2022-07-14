@@ -7,16 +7,6 @@
  * Velocity: change in position divided by time
  ************************************************************************/
 
- /***********************************************************************
-  * Velocity
-  * A non-default constructor that takes in a dx and dy
-  ************************************************************************/
-Velocity::Velocity(double dx, double dy)
-{
-   this->dx = dx;
-   this->dy = dy;
-}
-
 /***********************************************************************
  * Velocity COMPUTE VELOCITY
  * Calculate total speed
@@ -27,6 +17,15 @@ double Velocity::computeVelocity()
 }
 
 /***********************************************************************
+ * Velocity COMPUTE ANGLE
+ * Calculates the angle based on the velocity.
+ ************************************************************************/
+double Velocity::computeAngle()
+{
+   return atan2(dx, dy);
+}
+
+/***********************************************************************
  * Velocity UPDATE VELOCITY
  * Adds acceleration to the velocity
  ************************************************************************/
@@ -34,10 +33,4 @@ void Velocity::updateVelocity(Acceleration accel, double time)
 {
    dx = (dx + accel.getDDX() * time);
    dy = (dy + accel.getDDY() * time);
-}
-
-
-double Velocity::computeAngle()
-{
-   return atan2(dx, dy);
 }

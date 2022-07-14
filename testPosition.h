@@ -153,7 +153,6 @@ private:
    }  // teardown
 
    // Testing computeNewPosition with the following methods 
-
    void computeNewPosition_zeros() const
    {
       // setup
@@ -286,5 +285,4 @@ private:
       assert(pos.x == 60.0);
       assert(pos.y == 120.0);
    }  // teardown
-
 };

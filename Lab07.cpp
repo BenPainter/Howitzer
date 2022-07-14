@@ -124,7 +124,7 @@ void callBack(const Interface* pUI, void* p)
    // checking for hit target
    if ( distanceFromTarget <= 400.0)
    {
-      pGame->projectile.hitTargert();
+      pGame->projectile.hitTarget();
       resetGame(pGame);
    }
 

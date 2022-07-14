@@ -3,7 +3,9 @@
 
 class TestVelocity;
 
-
+/***********************************************************************
+ * Velocity: change in position divided by time
+ ************************************************************************/
 class Velocity
 {
 private:
@@ -15,16 +17,21 @@ public:
 
    // constructors
    Velocity() : dx(0.0), dy(0.0) {};
-   Velocity(double dx, double dy);
+   Velocity(double newDx, double newDy) { dx = newDx; dy = newDy; } 
 
-   double getDX() const { return dx; };
-   double getDY() const { return dy; };
+   // getters
+   double getDX() const { return dx; }
+   double getDY() const { return dy; }
+   
+   // setters
+   void setDX(double dx) { this->dx = dx; }
+   void setDY(double dy) { this->dy = dy; }
+
+   // calculation 
    double computeVelocity();
    double computeAngle();
 
-   void setDX(double dx) { this->dx = dx; };
-   void setDY(double dy) { this->dy = dy; };
-
+   // update
    void updateVelocity(Acceleration accel, double time);
 };
 

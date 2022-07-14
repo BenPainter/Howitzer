@@ -10,9 +10,11 @@
 #define INITIAL_VELOCITY 827.0
 #define TIME .5
 
-
-
 using namespace std;
+/********************************************************
+* Projectile
+* The class that stores all the details of a bullet.
+*********************************************************/
 class Projectile
 {
 private:
@@ -25,23 +27,27 @@ private:
    
 
 public:
+   // constructors
    Projectile() { reset(); }
    Projectile(const Position &pt) { this->pt = pt;}
-   void draw(ogstream& gout);
 
+   // getter and setter
+   Position getPT() const  { return pt;     }
+   void setPT(Position pt) { this->pt = pt; }
+
+   // status
    bool isAlive() const { return status == ALIVE; }
    bool isHit()   const { return status == HIT;   }
    bool isReady() const { return status == READY; }
 
-   Position getPT() const { return pt; }
-   void setPT(Position pt) { this->pt = pt; }
-   void update(Acceleration accel);
-   
-   void reset();
-
-   void hitTargert();
+   // update status
+   void hitTarget() { status = HIT; }
    void missTarget();
    void fired(Position newPT, const double& newAngle);
-
+   
+   // gameplay loop
+   void draw(ogstream& gout);
+   void update(Acceleration accel);
+   void reset();
 };
 

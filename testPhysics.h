@@ -1,6 +1,4 @@
 #pragma once
-
-
 #include <iostream>
 #include <cassert>
 #include <math.h>  
@@ -55,7 +53,6 @@ private:
       double difference = value - test;
       return (difference >= -tolerence) && (difference <= tolerence);
    }
-
 
    // Testing linearInter with the following methods 
    void linearInter_simple() const
@@ -191,7 +188,7 @@ private:
    {
       // setup
       double s = 1.0;
-      double angle = 1.5708;                                        // 90 degrees = 1.5708 radians
+      double angle = 1.5708;                     // 90 degrees = 1.5708 radians
       double ddy;
       // exercise
       ddy = verticalComp(s, angle);
@@ -203,7 +200,7 @@ private:
    {
       // setup
       double s = 1.0;
-      double angle = 0.785398;                                     // 45 degrees = 0.785398 radians
+      double angle = 0.785398;                   // 45 degrees = 0.785398 radians
       double ddy;
       // exercise
       ddy = verticalComp(s, angle);
@@ -215,7 +212,7 @@ private:
    {
       // setup
       double s = 1.0;
-      double angle = -0.785398;                                   // -45 degrees = -0.785398 radians
+      double angle = -0.785398;                  // -45 degrees = -0.785398 radians
       double ddy;
       // exercise
       ddy = verticalComp(s, angle);
@@ -264,7 +261,7 @@ private:
    {
       // setup
       double s = 1.0;
-      double angle = 1.5708;                                    // 90 degrees = 1.5708 radians
+      double angle = 1.5708;                     // 90 degrees = 1.5708 radians
       double ddx;
       // exercise
       ddx = horizontalComp(s, angle);
@@ -276,7 +273,7 @@ private:
    {
       // setup
       double s = 1.0;
-      double angle = 0.785398;                                   // 45 degrees = 0.785398 radians
+      double angle = 0.785398;                   // 45 degrees = 0.785398 radians
       double ddx;
       // exercise
       ddx = horizontalComp(s, angle);
@@ -288,7 +285,7 @@ private:
    {
       // setup
       double s = 1.0;
-      double angle = -0.785398;                                    // -45 degrees = -0.785398 radians
+      double angle = -0.785398;                  // -45 degrees = -0.785398 radians
       double ddx;
       // exercise
       ddx = horizontalComp(s, angle);

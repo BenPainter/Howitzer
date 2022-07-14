@@ -6,8 +6,6 @@
  * Summary:
  *    All the unit tests for the Ground class
  ************************************************************************/
-
-
 #pragma once
 
 #include "ground.h"
