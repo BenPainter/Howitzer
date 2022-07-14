@@ -37,11 +37,9 @@ class Game
 public:
    Game(Position ptUpperRight) :
       ptUpperRight(ptUpperRight),
-      ground(ptUpperRight),
-      angle(0.0)
+      ground(ptUpperRight)
    {
-      //ptHowitzer.setPixelsX(Position(ptUpperRight).getPixelsX() / 2.0);
-      ptHowitzer.setPixelsX(rand() % 700);//random(0.0, 700.0));
+      ptHowitzer.setPixelsX(rand() % 700);
       ground.reset(ptHowitzer);
       howitzer.setPT(ptHowitzer);
       for (int i = 0; i < 20; i++)
@@ -50,15 +48,25 @@ public:
          projectilePath[i].setPixelsY(ptUpperRight.getPixelsY() / 1.5);
       }
    }
-
    Ground ground;                 // the ground
    Position  projectilePath[20];  // path of the projectile
    Position  ptHowitzer;          // location of the howitzer
    Position  ptUpperRight;        // size of the screen
-   Howitzer howitzer;
-   Projectile projectile; 
-   double angle;                  // angle of the howitzer
+   Howitzer howitzer;             // the howitzer
+   Projectile projectile;         // the bullet
 };
+
+void resetGame(void* p)
+{
+   Game* pGame = (Game*)p;
+
+   pGame->howitzer.reset();
+   pGame->ground.reset(pGame->ptHowitzer);
+   pGame->howitzer.setPT(pGame->ptHowitzer);
+   pGame->projectile.reset();
+
+}
+
 
 /*************************************
  * All the interesting work happens here, when
@@ -73,10 +81,10 @@ void callBack(const Interface* pUI, void* p)
    // is the first step of every single callback function in OpenGL. 
    Game* pGame = (Game*)p;
    Acceleration accel;
+   
    //
    // accept input
    //
-
    double distanceFromTarget = computeDistance(pGame->projectile.getPT(), pGame->ground.getTarget());
 
 
@@ -87,39 +95,38 @@ void callBack(const Interface* pUI, void* p)
       pGame->projectile.fired(pGame->howitzer.getPT(), pGame->howitzer.getAngle());
       pGame->howitzer.loadHowitzer();
    }
-      
-
-
-   double test = pGame->ground.getElevationMeters(pGame->projectile.getPT());
    
-   // checking if above ground
-   if (pGame->projectile.getPT().getMetersY() - pGame->ground.getElevationMeters(pGame->projectile.getPT()) < 0.0)
-      pGame->projectile.missTarget();
-
-   if (pGame->projectile.getPT().getPixelsX() < 0.0 || pGame->projectile.getPT().getPixelsX() > 700.0)
-      pGame->projectile.missTarget();
-
-   // Checking for hit target
-   if ( distanceFromTarget <= 400.0)
+   if (pUI->isR())
    {
-      pGame->projectile.hitTargert();
-      cout << "Hit!";
-      pGame->howitzer.reset();
-      pGame->ground.reset(pGame->ptHowitzer);
-      pGame->howitzer.setPT(pGame->ptHowitzer);
-      pGame->projectile.reset();
-      
-
+      resetGame(pGame);
    }
-
-
 
    //
    // perform all the game logic
    //
 
-   // advance time by half a second.
-   //pGame->time += 0.5;
+   // checking if above ground
+   if (pGame->projectile.getPT().getMetersY() - 
+      pGame->ground.getElevationMeters(pGame->projectile.getPT()) < 0.0)
+   {
+      pGame->projectile.missTarget();
+      pGame->howitzer.resetAge();
+   }
+
+   // checking if off screen
+   if (pGame->projectile.getPT().getPixelsX() < 0.0 
+      || pGame->projectile.getPT().getPixelsX() > 700.0)
+   {
+      pGame->projectile.missTarget();
+      pGame->howitzer.resetAge();
+   }
+
+   // checking for hit target
+   if ( distanceFromTarget <= 400.0)
+   {
+      pGame->projectile.hitTargert();
+      resetGame(pGame);
+   }
 
    // move the projectile across the screen
    if (pGame->projectile.isAlive())
@@ -127,6 +134,7 @@ void callBack(const Interface* pUI, void* p)
       pGame->projectile.update(accel);
       pGame->howitzer.updateAge();
    }
+
    //
    // draw everything
    //
@@ -140,7 +148,6 @@ void callBack(const Interface* pUI, void* p)
    pGame->howitzer.draw(gout);
 
    // draw the projectile
-
    pGame->projectile.draw(gout);
 
    // draw some text on the screen

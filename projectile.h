@@ -25,12 +25,12 @@ private:
    
 
 public:
-   Projectile() { reset(); };
-   Projectile(const Position &pt) { this->pt = pt;  }
+   Projectile() { reset(); }
+   Projectile(const Position &pt) { this->pt = pt;}
    void draw(ogstream& gout);
 
    bool isAlive() const { return status == ALIVE; }
-   bool isHit()   const { return status == HIT; }
+   bool isHit()   const { return status == HIT;   }
    bool isReady() const { return status == READY; }
 
    Position getPT() const { return pt; }

@@ -22,7 +22,7 @@ public:
    void input(const Interface& pUI);
    bool isFired();
    Position getPT();
-   double getAngle();
+   double getAngle() { return angle; }
 
 
    void setPT(const Position &newPT);
@@ -33,6 +33,7 @@ public:
    double getAge() { return age; };
    void updateAge() { age += 0.5; };
    void reset();
+   void resetAge() { age = 0.0; }
 
 };
 

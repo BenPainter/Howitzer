@@ -8,9 +8,9 @@ void Howitzer::input(const Interface& pUI)
 {
    
    // move a large amount
-      if (pUI.isRight())
+      if (pUI.isRight() && angle <= 1.6)
          angle += 0.05;
-      if (pUI.isLeft())
+      if (pUI.isLeft() && angle >= -1.6)
          angle -= 0.05;
 
       // move by a little
@@ -22,7 +22,6 @@ void Howitzer::input(const Interface& pUI)
       // fire that gun
       if (pUI.isSpace())
       {
-         age = 0.0;
          fired = true;
       }
 }
@@ -43,13 +42,6 @@ Position Howitzer::getPT()
    return pt;
 }
 
-/*****************************************************
-* GET ANGLE
-******************************************************/
-double Howitzer::getAngle()
-{
-   return angle;
-}
 
 /*****************************************************
 * Howitzer
@@ -80,7 +72,7 @@ void Howitzer::draw(ogstream& gout)
 ******************************************************/
 void Howitzer::reset()
 {
-   age = -1.0;
+   resetAge();
    angle = 0.0;
    fired = false;
    pt.setMetersX(200.0);

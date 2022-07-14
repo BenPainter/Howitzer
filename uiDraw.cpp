@@ -260,7 +260,7 @@ void ogstream :: drawHowitzer(const Position & pos, double angle, double age)
    glEnd();
 
    // Now for the muzzle flash
-   if (age >= 0.0 && age < 2.0) // flash duration in seconds
+   if (age >= 0.1 && age < 2.0) // flash duration in seconds
    { 
       // draw the muzzle flash
       glBegin(GL_LINES);

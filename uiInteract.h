@@ -67,6 +67,7 @@ public:
    int  isLeft()      const { return isLeftPress;  };
    int  isRight()     const { return isRightPress; };
    bool isSpace()     const { return isSpacePress; };
+   bool isR()         const { return isRPress;     };
    
    static void *p;                   // for client
    static void (*callBack)(const Interface *, void *);
@@ -83,6 +84,7 @@ private:
    static int  isLeftPress;          //    "   left       "
    static int  isRightPress;         //    "   right      "
    static bool isSpacePress;         //    "   space      "
+   static bool isRPress;             //    "   r          "
 };
 
 
