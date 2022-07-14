@@ -7,14 +7,13 @@
 /*****************************************
 * Projectile
 ******************************************/
-void Projectile::draw(ogstream& gout)
+void Projectile::draw(ogstream& gout) 
 {
    list<Position>::iterator it;
-   int count = 0;
-   for (it = tail.begin(); it != tail.end(); it++)
+   double count = 0;
+   for (it = tail.begin(); it != tail.end(); it++, count++)
    {
       gout.drawProjectile(*(it), count);
-      count += 1;
    }
 
    

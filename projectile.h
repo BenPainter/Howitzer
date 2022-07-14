@@ -26,15 +26,15 @@ private:
 
 public:
    Projectile() { reset(); };
-   Projectile(Position pt) { this->pt = pt;  };
+   Projectile(const Position &pt) { this->pt = pt;  }
    void draw(ogstream& gout);
 
-   bool isAlive() { return status == ALIVE; };
-   bool isHit()   { return status == HIT; };
-   bool isReady() { return status == READY; };
+   bool isAlive() const { return status == ALIVE; }
+   bool isHit()   const { return status == HIT; }
+   bool isReady() const { return status == READY; }
 
-   Position getPT() { return pt; };
-   void setPT(Position pt) { this->pt = pt; };
+   Position getPT() const { return pt; }
+   void setPT(Position pt) { this->pt = pt; }
    void update(Acceleration accel);
    
    void reset();
