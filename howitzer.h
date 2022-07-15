@@ -19,25 +19,25 @@ private:
 
 public:
    // constructors
-   Howitzer()            { reset(); }
+   Howitzer()            { reset();       }
    Howitzer(Position pt) { this->pt = pt; }
 
    // setters
-   void setPT(const Position& newPT) { pt = newPT; }
-   void setAngle(double newAngle)    { angle = newAngle; }
+   void setPT(const Position& newPT)       { pt = newPT;       }
+   void setAngle(const double newAngle)    { angle = newAngle; }
 
    // getters
-   Position getPT()    { return pt; }
-   double   getAngle() { return angle; }
-   double   getAge()   { return age; }
+   Position& getPT()          { return pt;    }
+   double    getAngle() const { return angle; }
+   double    getAge()   const { return age;   }
 
    // resets
    void reset();
    void resetAge() { age = 0.0; }
 
    // status
-   void loadHowitzer() { fired = false; }
-   bool isFired()      { return fired; }
+   void loadHowitzer()     { fired = false; }
+   bool isFired()    const { return fired; }
    
    // gameplay loop
    void input(const Interface& pUI);

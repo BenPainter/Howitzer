@@ -6,27 +6,31 @@
  * 3. Assignment Description:
  *      Simulate firing the M777 howitzer 15mm artillery piece
  * 4. What was the hardest part? Be as specific as possible.
- *      ??
+ *      The most difficult parts for us were trying to figure 
+ *      where the howitzer position was being randomized and 
+ *      then getting the Howitzer class to be responsible for
+ *      its positon. We had a hard time making sure the howitzer
+ *      was on the ground.
  * 5. How long did it take for you to complete the assignment?
- *      ??
+ *      We are estimating it took us about 10 hours between last
+ *      weeks assignment of getting it to just work and this week
+ *      cleaning up the code and working on the encapsulation 
+ *      metrics we learned this semester. 
  *****************************************************************/
 
 #include <cassert>      // for ASSERT
 #include <cstdlib>      // for srand
-#include <ctime>       // for time for srand
+#include <ctime>        // for time for srand
 #include "uiInteract.h" // for INTERFACE
 #include "uiDraw.h"     // for RANDOM and DRAW*
 #include "ground.h"     // for GROUND
 #include "position.h"   // for POSITION
-#include "test.h"
-#include "physics.h"
-#include "howitzer.h"  // for HOWITZER
+#include "test.h"       // for TEST
+#include "physics.h"    // for PHYSICS
+#include "howitzer.h"   // for HOWITZER
 #include "projectile.h" // for PROJECTILE
 
-
 using namespace std;
-
-
 
 /*************************************************************************
  * Game
@@ -39,18 +43,10 @@ public:
       ptUpperRight(ptUpperRight),
       ground(ptUpperRight)
    {
-      ptHowitzer.setPixelsX(rand() % 700);
-      ground.reset(ptHowitzer);
-      howitzer.setPT(ptHowitzer);
-      for (int i = 0; i < 20; i++)
-      {
-         projectilePath[i].setPixelsX((double)i * 2.0);
-         projectilePath[i].setPixelsY(ptUpperRight.getPixelsY() / 1.5);
-      }
+      ground.reset(howitzer.getPT());
    }
    Ground ground;                 // the ground
    Position  projectilePath[20];  // path of the projectile
-   Position  ptHowitzer;          // location of the howitzer
    Position  ptUpperRight;        // size of the screen
    Howitzer howitzer;             // the howitzer
    Projectile projectile;         // the bullet
@@ -61,8 +57,7 @@ void resetGame(void* p)
    Game* pGame = (Game*)p;
 
    pGame->howitzer.reset();
-   pGame->ground.reset(pGame->ptHowitzer);
-   pGame->howitzer.setPT(pGame->ptHowitzer);
+   pGame->ground.reset(pGame->howitzer.getPT());
    pGame->projectile.reset();
 
 }
@@ -86,7 +81,6 @@ void callBack(const Interface* pUI, void* p)
    // accept input
    //
    double distanceFromTarget = computeDistance(pGame->projectile.getPT(), pGame->ground.getTarget());
-
 
    if (!pGame->howitzer.isFired() && !pGame->projectile.isAlive())
       pGame->howitzer.input(*pUI);
@@ -154,9 +148,7 @@ void callBack(const Interface* pUI, void* p)
    gout.setf(ios::fixed | ios::showpoint);
    gout.precision(1);
    gout << "Time since the bullet was fired: "
-      << pGame->howitzer.getAge() << "s\n";
-
-   
+      << pGame->howitzer.getAge() << "s\n"; 
 }
 
 double Position::metersFromPixels = 40.0;

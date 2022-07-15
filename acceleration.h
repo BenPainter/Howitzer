@@ -8,7 +8,6 @@
  ************************************************************************/
 
 class Acceleration
-
 {
 private:
    double ddx; // horizontal acceleration
@@ -24,11 +23,11 @@ public:
    double getDDY() const { return ddy; }
 
    // updates the ddX and ddY attributes 
-   void setDDX(double ddx) { this->ddx = ddx; }
-   void setDDY(double ddy) { this->ddy = ddy; }
+   void setDDX(const double  ddx) { this->ddx = ddx; }
+   void setDDY(const double  ddy) { this->ddy = ddy; }
 
    // use the change in velocity to calculate acceleration
-   double computeHorizontalComp(double angle, double thrust);
-   double computeVerticalComp(double angle, double thrust);
+   double computeHorizontalComp(double angle, double velocity) const;
+   double computeVerticalComp(double angle, double velocity) const;
 };
 

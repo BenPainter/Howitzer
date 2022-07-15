@@ -28,10 +28,10 @@ public:
    void setDY(double dy) { this->dy = dy; }
 
    // calculation 
-   double computeVelocity();
-   double computeAngle();
+   double computeVelocity() const;
+   double computeAngle()    const;
 
    // update
-   void updateVelocity(Acceleration accel, double time);
+   void updateVelocity(const Acceleration &accel, double time);
 };
 

@@ -11,7 +11,7 @@
  * Velocity COMPUTE VELOCITY
  * Calculate total speed
  ************************************************************************/
-double Velocity::computeVelocity()
+double Velocity::computeVelocity() const
 {
    return sqrt((dx * dx) + (dy * dy));
 }
@@ -20,7 +20,7 @@ double Velocity::computeVelocity()
  * Velocity COMPUTE ANGLE
  * Calculates the angle based on the velocity.
  ************************************************************************/
-double Velocity::computeAngle()
+double Velocity::computeAngle() const
 {
    return atan2(dx, dy);
 }
@@ -29,7 +29,7 @@ double Velocity::computeAngle()
  * Velocity UPDATE VELOCITY
  * Adds acceleration to the velocity
  ************************************************************************/
-void Velocity::updateVelocity(Acceleration accel, double time)
+void Velocity::updateVelocity(const Acceleration &accel, double time)
 {
    dx = (dx + accel.getDDX() * time);
    dy = (dy + accel.getDDY() * time);

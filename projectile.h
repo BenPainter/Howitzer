@@ -24,16 +24,15 @@ private:
    enum Status { ALIVE, HIT, READY };
    Status status;
    void updateTail();
-   
 
 public:
    // constructors
-   Projectile() { reset(); }
+   Projectile()                   { reset();      }
    Projectile(const Position &pt) { this->pt = pt;}
 
    // getter and setter
-   Position getPT() const  { return pt;     }
-   void setPT(Position pt) { this->pt = pt; }
+   Position getPT()         const { return pt;     }
+   void setPT(const Position &pt) { this->pt = pt; }
 
    // status
    bool isAlive() const { return status == ALIVE; }
@@ -43,11 +42,11 @@ public:
    // update status
    void hitTarget() { status = HIT; }
    void missTarget();
-   void fired(Position newPT, const double& newAngle);
+   void fired(const Position &newPT, const double& newAngle);
    
    // gameplay loop
    void draw(ogstream& gout);
-   void update(Acceleration accel);
+   void update(Acceleration &accel);
    void reset();
 };
 

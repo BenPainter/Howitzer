@@ -38,6 +38,8 @@ void Howitzer::draw(ogstream& gout)
 ******************************************************/
 void Howitzer::reset()
 {
+   pt.setPixelsX((rand() % 700));
+   pt.setPixelsY(0.0);
    resetAge();
    angle = 0.0;
    fired = false;

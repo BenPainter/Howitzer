@@ -19,18 +19,18 @@ Acceleration::Acceleration(double ddx, double ddy)
  * Acceleration COMPUTE HORIZONTAL COMP
  * Uses dx to calculate ddx.
  ************************************************************************/
-double Acceleration::computeHorizontalComp(double angle, double thrust)
+double Acceleration::computeHorizontalComp(double angle, double velocity) const
 {
    // Compute x componenent of acceleration
-   return sin(angle) * thrust;
+   return sin(angle) * velocity;
 }
 
 /***********************************************************************
  * Acceleration COMPUTE VERTICAL COMP
  * Uses dy to calculate ddy.
  ************************************************************************/
-double Acceleration::computeVerticalComp(double angle, double thrust)
+double Acceleration::computeVerticalComp(double angle, double velocity) const
 {
    // Compute y componenent of acceleration
-   return (cos(angle) * thrust);
+   return (cos(angle) * velocity);
 }

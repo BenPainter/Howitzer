@@ -19,7 +19,7 @@ void Projectile::draw(ogstream& gout)
 * Performs all the math needed to move
 * the projectile.
 ******************************************/
-void Projectile::update(Acceleration accel)
+void Projectile::update(Acceleration &accel)
 {
    // update tail
    updateTail();
@@ -83,7 +83,7 @@ void Projectile::missTarget()
 * Updates the attributes of the projectile 
 * to reflect the bullet being fired.
 ******************************************/
-void Projectile::fired(Position newPT, const double& newAngle)
+void Projectile::fired(const Position &newPT, const double& newAngle)
 {
    status = ALIVE;
    pt = newPT;
